@@ -1,0 +1,10 @@
+﻿@model List<CategoryForLanguageDto>
+
+<div>
+    @{
+        foreach(var category in Model)
+        {
+            <h3>@category.CategoryName</h3>
+        };
+    }
+</div>
