@@ -11,5 +11,7 @@ namespace IMobile.Entities.Concrete
 {
     public class AppUser : IdentityUser , IEntity
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

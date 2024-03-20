@@ -12,6 +12,6 @@ namespace IMobile.DataAccess.Abstract
 {
     public interface IProductDal : IRepositoryBase<Product>
     {
-        IResult CreateProduct(ProductCreateDto productCreate);
+        IResult CreateProduct(ProductCreateDto productCreate, string userId);
     }
 }

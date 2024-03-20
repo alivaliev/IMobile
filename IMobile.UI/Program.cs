@@ -1,9 +1,19 @@
 using IMobile.Business.DependencyResolver.DependencyRegister;
+using IMobile.Core.Entities.Concrete;
+using IMobile.DataAccess.Concrete.EntityFramework;
+using IMobile.Entities.Concrete;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddDefaultIdentity<AppUser>().AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>();
+
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 
 builder.Services.Create();
 

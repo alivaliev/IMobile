@@ -1,10 +1,12 @@
 ﻿using IMobile.Business.Abstract;
 using IMobile.Entities.DTO_s.CategoryDto_s;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IMobile.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;

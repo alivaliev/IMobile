@@ -10,6 +10,6 @@ namespace IMobile.Business.Abstract
 {
     public interface IProductService
     {
-        IResult CreateProduct(ProductCreateDto productCreate);
+        IResult CreateProduct(ProductCreateDto productCreate, string userId);
     }
 }

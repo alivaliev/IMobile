@@ -1,5 +1,4 @@
 ﻿using IMobile.Core.Configurations;
-using IMobile.Core.Entities.Concrete;
 using IMobile.Entities.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -31,7 +30,7 @@ namespace IMobile.DataAccess.Concrete.EntityFramework
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<User>().ToTable("Users");
+            builder.Entity<AppUser>().ToTable("Users");
             builder.Entity<IdentityRole>().ToTable("Roles");
         }
     }

@@ -23,7 +23,7 @@ namespace IMobile.DataAccess.Concrete.EntityFramework
             _mapper = mapper;
         }
 
-        public IResult CreateProduct(ProductCreateDto productCreate)
+        public IResult CreateProduct(ProductCreateDto productCreate,string userId)
         {
             using var context = new AppDbContext();
             List<Picture> pictures = new();
@@ -33,22 +33,30 @@ namespace IMobile.DataAccess.Concrete.EntityFramework
                 pictures.Add(new Picture { PhotoUrl = productCreate.PhotoUrls[i] });
             }
 
-            var mapper = _mapper.Map<Product>(productCreate);
-            context.Products.Add(mapper);
+            Product product = new()
+            {
+                AppUserId = userId,
+                Discount = productCreate.Discount,
+                Price = productCreate.Price,
+                Quantity = productCreate.Quantity,
+                Pictures = pictures
+            };
+            context.Products.Add(product);
             context.SaveChanges();
 
             for (int i = 0; i < productCreate.ProductNames.Count; i++)
             {
                 ProductLanguage pl = new()
                 {
-                    ProductId = mapper.Id,
+                    ProductId = product.Id,
                     ProductName = productCreate.ProductNames[i],
                     Description = productCreate.Descriptions[i],
                     SeoUrl = SeoHelper.SeoUrlCreater(productCreate.ProductNames[i]),
-                    LangCode = i == 0 ? "az-Az" : i == 1 ? "en-Us" : "ru-Ru"
+                    LangCode = i == 0 ? "az" : i == 1 ? "en" : "ru"
                 };
-                //context.ProductLanguages
+                context.ProductLanguages.Add(pl);
             }
+            context.SaveChanges();
 
 
             return new SuccessResult();

@@ -24,9 +24,9 @@ namespace IMobile.Business.Concrete
             _mapper = mapper;
         }
 
-        public IResult CreateProduct(ProductCreateDto productCreate)
+        public IResult CreateProduct(ProductCreateDto productCreate, string userId)
         {
-            _productDal.CreateProduct(productCreate);
+            _productDal.CreateProduct(productCreate,userId);
             return new SuccessResult();
         }
     }
