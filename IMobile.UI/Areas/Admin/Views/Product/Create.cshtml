@@ -1,15 +1,15 @@
 ﻿<form method="post">
-    <input type="text" name="ProductName" placeholder="Az" />
-    <input type="text" name="ProductName" placeholder="En" />
-    <input type="text" name="ProductName" placeholder="Ru" />
+    <input type="text" name="ProductNames" placeholder="Az" />
+    <input type="text" name="ProductNames" placeholder="En" />
+    <input type="text" name="ProductNames" placeholder="Ru" />
     <input type="hidden" name="LangCode" value="Az" />
     <input type="hidden" name="LangCode" value="Ru" />
     <input type="hidden" name="LangCode" value="En" />
     <br />
     <br />
-    <input type="text" name="Description" placeholder="Az" />
-    <input type="text" name="Description" placeholder="En" />
-    <input type="text" name="Description" placeholder="Ru" />
+    <input type="text" name="Descriptions" placeholder="Az" />
+    <input type="text" name="Descriptions" placeholder="En" />
+    <input type="text" name="Descriptions" placeholder="Ru" />
     <input type="hidden" name="LangCode" value="Az" />
     <input type="hidden" name="LangCode" value="Ru" />
     <input type="hidden" name="LangCode" value="En" />
@@ -19,7 +19,7 @@
     <input type="number" name="Discount" placeholder="Discount" />
     <input type="number" name="Quantity" placeholder="Quantity" />
     <br />
-    <select class="form-control" name="CategoryId" asp-items="ViewBag.Categories">
+    <select class="form-control" name="CategoryId" asp-items="ViewBag.Categories" >
     </select>
     <br />
     <input type="file" name="PhotoUrls" />
