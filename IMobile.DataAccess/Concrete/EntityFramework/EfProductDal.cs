@@ -23,15 +23,10 @@ namespace IMobile.DataAccess.Concrete.EntityFramework
             _mapper = mapper;
         }
 
-        public IResult CreateProduct(ProductCreateDto productCreate,string userId)
+        public IResult CreateProduct(ProductCreateDto productCreate, string userId)
         {
             using var context = new AppDbContext();
-            List<Picture> pictures = new();
 
-            for (int i = 0; i < productCreate.PhotoUrls.Count; i++)
-            {
-                pictures.Add(new Picture { PhotoUrl = productCreate.PhotoUrls[i] });
-            }
 
             Product product = new()
             {
@@ -39,10 +34,22 @@ namespace IMobile.DataAccess.Concrete.EntityFramework
                 Discount = productCreate.Discount,
                 Price = productCreate.Price,
                 Quantity = productCreate.Quantity,
-                Pictures = pictures
+                CategoryId = productCreate.CategoryId,
             };
             context.Products.Add(product);
             context.SaveChanges();
+
+
+            List<Picture> pictures = new();
+            productCreate.PhotoUrls.Add("");
+            productCreate.PhotoUrls.Add("");
+            productCreate.PhotoUrls.Add("");
+
+            for (int i = 0; i < productCreate.PhotoUrls.Count; i++)
+            {
+                pictures.Add(new Picture { PhotoUrl = productCreate.PhotoUrls[i], ProductId = product.Id });
+            }
+
 
             for (int i = 0; i < productCreate.ProductNames.Count; i++)
             {
