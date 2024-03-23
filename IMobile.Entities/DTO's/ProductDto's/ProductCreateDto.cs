@@ -12,8 +12,6 @@ namespace IMobile.Entities.DTO_s.ProductDto_s
         public List<string> MoreInfos { get; set; }
         public List<string> Descriptions { get; set; }
         public List<string> PhotoUrls { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public decimal Discount { get; set; }

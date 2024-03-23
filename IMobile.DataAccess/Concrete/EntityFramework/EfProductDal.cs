@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IMobile.Core.DataAccess.EntityFramework;
 using IMobile.Core.Utilities.Results.Abstract;
+using IMobile.Core.Utilities.Results.Concrete.ErrorResults;
 using IMobile.Core.Utilities.Results.Concrete.SuccessResults;
 using IMobile.Core.Utilities.SeoHelpers;
 using IMobile.DataAccess.Abstract;
@@ -28,6 +29,13 @@ namespace IMobile.DataAccess.Concrete.EntityFramework
             using var context = new AppDbContext();
             List<Picture> pictures = new();
 
+            var category = context.Categories.FirstOrDefault(c => c.Id == productCreate.CategoryId);
+            if (category == null)
+            {
+                // Handle the case where the CategoryId does not exist
+                return new ErrorResult("Invalid CategoryId");
+            }
+
             for (int i = 0; i < productCreate.PhotoUrls.Count; i++)
             {
                 pictures.Add(new Picture { PhotoUrl = productCreate.PhotoUrls[i] });
@@ -37,9 +45,12 @@ namespace IMobile.DataAccess.Concrete.EntityFramework
             {
                 AppUserId = userId,
                 Discount = productCreate.Discount,
+                CategoryId = productCreate.CategoryId,
                 Price = productCreate.Price,
                 Quantity = productCreate.Quantity,
-                Pictures = pictures
+                Pictures = pictures,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now,
             };
             context.Products.Add(product);
             context.SaveChanges();
